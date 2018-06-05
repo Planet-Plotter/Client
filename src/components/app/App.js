@@ -11,12 +11,11 @@ class App extends Component {
     data: [],
   };
 
-  requestPlanetData(urlQuery) {
-    const that = this;
-    superagent.get("https://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?table=exoplanets&select=pl_hostname,ra,dec,st_teff,pl_orbper,st_dist,pl_pnum,pl_masse,pl_rade,pl_disc,pl_telescope,pl_name,pl_mnum,pl_pelink,st_spstr,st_age,&where=pl_disc%3E2017&order=pl_disc&format=JSON&select=count(*)")
+  requestPlanetData = (urlQuery) => {
+    superagent.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&count=5')
       .then(response => {
-        console.log(response);
-        that.setState({
+        console.log(response.body);
+        this.setState({
           data: response.body,
         });
       })
