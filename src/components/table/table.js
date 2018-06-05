@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ReactTable from 'react-table';
-import "react-table/react-table.css";
-
+import 'react-table/react-table.css';
 
 class TableOne extends Component {
   render() {
@@ -36,7 +35,7 @@ class TableOne extends Component {
     }, {
       Header: 'Age',
       accessor: 'age',
-      // Cell: props => <span className="number">{props.value}</span>, // Custom cell components!
+      Cell: props => <span className="number">{props.value}</span>, // Custom cell components!
     }, {
       id: 'friendName', // Required because our accessor is not a string
       Header: 'Friend Name',
