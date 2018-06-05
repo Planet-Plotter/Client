@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import superagent from 'superagent';
 
 import TableOne from '../table';
+import Form from '../form';
 import './App.css';
 
 class App extends Component {
@@ -22,12 +23,15 @@ class App extends Component {
       .catch(console.log);
   }
 
-  queryBuilder(inputArray) {
+  queryBuilder = (inputArray) => {
     // Needs to handle all the options selected and build the request url
+    // date, count
+
+    //
 
   }
 
-  handleSubmit() {
+  handleSubmit = () => {
     // handles the form submit and puts the values into an array
     // use form.elements object?
     // let { name, value } = event.target;
@@ -48,6 +52,7 @@ class App extends Component {
           <h1 className="App-title">React Table Test</h1>
         </header>
         <TableOne data={this.state.data} />
+        <Form />
       </div>
     );
   }
