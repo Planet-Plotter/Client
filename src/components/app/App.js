@@ -51,7 +51,7 @@ class App extends Component {
         <header className="App-header" onClick={this.requestPlanetData}>
           <h1 className="App-title">React Table Test</h1>
         </header>
-        <TableOne data={this.state.data} />
+        {/* <TableOne data={this.state.data} /> */}
         <Form />
       </div>
     );

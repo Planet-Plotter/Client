@@ -8,7 +8,6 @@ class MyForm extends Component {
     day: 1,
   }
   createYearOptions = () => {
-    // need to use date to get current year automatically
     const currentYear = this.currentDate()[0];
 
     const options = [];
@@ -23,8 +22,7 @@ class MyForm extends Component {
     const selectedYear = this.state.year;
     let maxMonth = 12;
 
-    if (selectedYear === currYear){
-      // limit the max month to current date month
+    if (selectedYear === currYear) {
       maxMonth = this.currentDate()[1];
     }
 
@@ -43,7 +41,6 @@ class MyForm extends Component {
     // TODO: limit days of month depending on which month is selected
 
     if (selectedYear === currYear) {
-      // limit the max month to current date month
       maxDay = this.currentDate()[2];
     }
 
@@ -61,9 +58,9 @@ class MyForm extends Component {
     const year = dateObj.getUTCFullYear();
 
     // this.setState({
-    //   month:month,
-    //   day:day,
-    //   year:year,
+    //   month,
+    //   day,
+    //   year,
     // });
 
     return [year, month, day];
@@ -79,18 +76,33 @@ class MyForm extends Component {
   }
 
 
-
   render() {
     return (
       <form onSubmit={this.props.handleSubmit} className="planet-form" >
-        <select key={10} id="select-month" name="month" onChange={this.handleSelectChange}>
+        <select
+          key={30}
+          id="select-day"
+          name="day"
+          onChange={this.handleSelectChange}
+        >
+          {this.createDayOptions()}
+        </select>
+  
+        <select
+          key={10}
+          id="select-month" 
+          name="month"
+          onChange={this.handleSelectChange}
+        >
           {this.createMonthOptions()}
         </select>
-        <select key={20} id="select-year" name="year" onChange={this.handleSelectChange}>
+        <select
+          key={20}
+          id="select-year"
+          name="year"
+          onChange={this.handleSelectChange}
+        >
           {this.createYearOptions()}
-        </select>
-        <select key={30} id="select-day" name="day" onChange={this.handleSelectChange}>
-          {this.createDayOptions()}
         </select>
       </form>
     );
