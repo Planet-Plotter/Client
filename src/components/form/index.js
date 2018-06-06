@@ -68,17 +68,10 @@ class MyForm extends Component {
     const day = dateObj.getUTCDate();
     const year = dateObj.getUTCFullYear();
 
-    // this.setState({
-    //   month,
-    //   day,
-    //   year,
-    // });
-
     return [year, month, day];
   }
 
   handleSelectChange = (event) => {
-    // event.preventDefault();
     const { name, value } = event.target;
 
     this.setState({
@@ -86,10 +79,15 @@ class MyForm extends Component {
     });
   }
 
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.props.onComplete(this.state);
+  }
+
 
   render() {
     return (
-      <form onSubmit={this.props.handleSubmit} className="planet-form" >
+      <form onSubmit={this.handleSubmit} id="planet-form" >
         <select
           key={30}
           id="select-day"
@@ -115,6 +113,7 @@ class MyForm extends Component {
         >
           {this.createYearOptions()}
         </select>
+        <button type="submit" form="planet-form" value="Submit"> Go! </button>
       </form>
     );
   }

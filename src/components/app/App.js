@@ -31,19 +31,14 @@ class App extends Component {
 
   }
 
-  handleSubmit = () => {
-    // handles the form submit and puts the values into an array
-    // use form.elements object?
-    // let { name, value } = event.target;
+  handleSubmit = (state) => {
+    // handles the form submit and puts the values into an array to build the query
+    // event.preventDefault();
+    // this.queryBuilder()
+    console.log(state);
+    console.log('Hit handleSubmit');
+    
 
-    // this.setState({
-    //   [name]: value,
-    // });
-
-    // const inputArray = {
-    //   [name]: value,
-    // };
-    // return this.queryBuilder(inputArray);
   }
   render() {
     return (
@@ -52,7 +47,7 @@ class App extends Component {
           <h1 className="App-title">React Table Test</h1>
         </header>
         {/* <TableOne data={this.state.data} /> */}
-        <Form />
+        <Form onComplete={this.handleSubmit} />
       </div>
     );
   }
