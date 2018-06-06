@@ -39,6 +39,17 @@ class MyForm extends Component {
     let maxDay = 31;
 
     // TODO: limit days of month depending on which month is selected
+    if ([4, 6, 9, 11].indexOf(this.state.month) > -1) {
+      maxDay = 30;
+    } else if (this.state.month === 2) {
+      if ([1996, 2000, 2004, 2008, 2012, 2016, 2020, 2024, 2028].indexOf(this.state.year) > -1) {
+        maxDay = 29;
+      } else {
+        maxDay = 28;
+      }
+    } else {
+      maxDay = 31;
+    }
 
     if (selectedYear === currYear) {
       maxDay = this.currentDate()[2];
