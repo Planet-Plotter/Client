@@ -12,10 +12,9 @@ class App extends Component {
     data: [],
   };
 
-  requestPlanetData = (urlQuery) => {
-    superagent.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&count=5')
+  requestPlanetData = (queryUrl) => {
+    superagent.get(queryUrl)
       .then(response => {
-        console.log(response.body);
         this.setState({
           data: response.body,
         });
@@ -23,24 +22,37 @@ class App extends Component {
       .catch(console.log);
   }
 
-  queryBuilder = (inputArray) => {
-    // Needs to handle all the options selected and build the request url
-    // date, count
-
-    //
-
-  }
-
   handleSubmit = (state) => {
-    // handles the form submit and puts the values into an array to build the query
-    // event.preventDefault();
-    // this.queryBuilder()
     console.log(state);
-    console.log('Hit handleSubmit');
-    
+    let {
+      day,
+      month,
+      year,
+    } = state;
 
+    // Conversion for proper url API requirements in case day and month are less than 2 digits
+    day = day.toString();
+    month = month.toString();
+
+    if (day.length < 2) day = `0${day}`;
+    if (month.length < 2) month = `0${month}`;
+
+    const url = `https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&start_date=${year}-${month}-${day}&end_date=${year}-${month}-${day}`;
+
+    this.requestPlanetData(url);
   }
+
   render() {
+    const {
+      data, 
+    } = this.state;
+
+    let url = null;
+    if (data.length > 0) {
+      console.log(data[0]);
+      url = data[0].url;
+    }
+    console.log(url);
     return (
       <div className="App">
         <header className="App-header" onClick={this.requestPlanetData}>
@@ -48,6 +60,7 @@ class App extends Component {
         </header>
         {/* <TableOne data={this.state.data} /> */}
         <Form onComplete={this.handleSubmit} />
+        <img src={url} alt="test" />
       </div>
     );
   }

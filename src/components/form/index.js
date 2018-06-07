@@ -4,8 +4,8 @@ import './form.css';
 class MyForm extends Component {
   state = {
     year: 1995,
-    month: 1,
-    day: 1,
+    month: 6,
+    day: 16,
   }
   createYearOptions = () => {
     const currentYear = this.currentDate()[0];
@@ -21,14 +21,19 @@ class MyForm extends Component {
     const currYear = this.currentDate()[0];
     const selectedYear = this.state.year;
     let maxMonth = 12;
+    let minMonth = 1;
 
     if (selectedYear === currYear) {
       maxMonth = this.currentDate()[1];
     }
 
+    if (selectedYear === 1995) {
+      minMonth = 6;
+    }
+
     const options = [];
-    for (let i = 1; i <= maxMonth; i++) {
-      options.push(<option key={i} value={parseInt(i, 10)}>{i}</option>);
+    for (let i = minMonth; i <= maxMonth; i++) {
+      options.push(<option key={i} value={i}>{i}</option>);
     }
     return options;
   }
@@ -37,6 +42,7 @@ class MyForm extends Component {
     const currYear = this.currentDate()[0];
     const selectedYear = this.state.year || 1995;
     let maxDay = 31;
+    let minDay = 1;
 
     // TODO: limit days of month depending on which month is selected
     if ([4, 6, 9, 11].indexOf(this.state.month) > -1) {
@@ -55,9 +61,13 @@ class MyForm extends Component {
       maxDay = this.currentDate()[2];
     }
 
+    if (selectedYear === 1995) {
+      minDay = 16;
+    }
+
     const options = [];
-    for (let i = 1; i <= maxDay; i++) {
-      options.push(<option key={i} value={parseInt(i, 10)}>{i}</option>);
+    for (let i = minDay; i <= maxDay; i++) {
+      options.push(<option key={i} value={i}>{i}</option>);
     }
     return options;
   }
@@ -81,12 +91,14 @@ class MyForm extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+    console.log(event.target.elements);
     this.props.onComplete(this.state);
   }
 
 
   render() {
     return (
+      <div>
       <form onSubmit={this.handleSubmit} id="planet-form" >
         <select
           key={30}
@@ -113,8 +125,9 @@ class MyForm extends Component {
         >
           {this.createYearOptions()}
         </select>
+        </form>
         <button type="submit" form="planet-form" value="Submit"> Go! </button>
-      </form>
+        </div>
     );
   }
 }
