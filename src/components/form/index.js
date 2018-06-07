@@ -4,20 +4,21 @@ import './form.css';
 const currentDate = new Date();
 
 class MyForm extends Component {
-  // state = {
-  //   year: 1995,
-  //   month: 6,
-  //   day: 16,
-  // }
-
-  componentDidMount = () => {
-    const currDate = this.currentDate();
-    this.setState({
-      year:currDate[0],
-      month:currDate[1],
-      day:currDate[2],
-    })
+  state = {
+    year: 1995,
+    month: 6,
+    day: 16,
   }
+
+  // componentDidMount = () => {
+  //   const currDate = this.currentDate();
+  //   console.log('CurrDate after mount: ', currDate);
+  //   this.setState({
+  //     year:currDate[0],
+  //     month:currDate[1],
+  //     day:currDate[2],
+  //   })
+  // }
 
   createYearOptions = () => {
     const currentYear = this.currentDate()[0];
@@ -31,7 +32,7 @@ class MyForm extends Component {
 
   createMonthOptions = () => {
     const currYear = this.currentDate()[0];
-    const selectedYear = currYear || this.state.year;
+    const selectedYear = this.state.year;
     let maxMonth = 12;
     let minMonth = 1;
 
@@ -53,8 +54,8 @@ class MyForm extends Component {
   createDayOptions = () => {
     const currYear = this.currentDate()[0];
     const currMonth = this.currentDate()[1];
-    const selectedYear = currYear || this.state.year;
-    const selectedMonth = currMonth || this.state.month;
+    const selectedYear = this.state.year;
+    const selectedMonth = this.state.month;
     let maxDay = 31;
     let minDay = 1;
 
@@ -105,14 +106,24 @@ class MyForm extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log(event.target.elements);
-    this.props.onComplete(this.state);
+    const values = [
+      event.target.elements[0].value,
+      event.target.elements[1].value,
+      event.target.elements[2].value,
+    ];
+    this.setState({
+      day: parseInt(values[0], 10),
+      month: parseInt(values[1], 10),
+      year: parseInt(values[2], 10),
+    });
+
+    this.props.onComplete(values);
   }
 
 
   render() {
     const currDate = this.currentDate();
-    console.log(typeof currDate[2]);
+    console.log(currDate[2]);
 
     return (
       <div>
@@ -122,7 +133,6 @@ class MyForm extends Component {
             id="select-day"
             name="day"
             onChange={this.handleSelectChange}
-            defaultValue={currDate[2]}
           >
             {this.createDayOptions()}
           </select>
@@ -132,7 +142,6 @@ class MyForm extends Component {
             id="select-month" 
             name="month"
             onChange={this.handleSelectChange}
-            defaultValue={currDate[1]}
           >
             {this.createMonthOptions()}
           </select>
@@ -141,7 +150,7 @@ class MyForm extends Component {
             id="select-year"
             name="year"
             onChange={this.handleSelectChange}
-            defaultValue={currDate[0]}
+            // defaultValue={currDate[0]}
           >
             {this.createYearOptions()}
           </select>

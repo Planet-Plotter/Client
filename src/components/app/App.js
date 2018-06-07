@@ -23,12 +23,14 @@ class App extends Component {
       .catch(console.log);
   }
 
-  handleSubmit = (state) => {
-    let {
+  handleSubmit = (values) => {
+    let [
       day,
       month,
       year,
-    } = state;
+     ] = values;
+
+     console.log(values);
 
     // Conversion for proper url API requirements in case day and month are less than 2 digits
     day = day.toString();
@@ -55,7 +57,7 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <header className="App-header" onClick={this.requestPlanetData}>
+        <header className="App-header">
           <h1 className="App-title">React Table Test</h1>
         </header>
         {/* <TableOne data={this.state.data} /> */}
