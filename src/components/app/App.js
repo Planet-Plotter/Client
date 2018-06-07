@@ -13,6 +13,7 @@ class App extends Component {
   };
 
   requestPlanetData = (queryUrl) => {
+    console.log('Requested URL: ', queryUrl);
     superagent.get(queryUrl)
       .then(response => {
         this.setState({
@@ -23,7 +24,6 @@ class App extends Component {
   }
 
   handleSubmit = (state) => {
-    console.log(state);
     let {
       day,
       month,
@@ -48,11 +48,11 @@ class App extends Component {
     } = this.state;
 
     let url = null;
+    let title = null;
     if (data.length > 0) {
-      console.log(data[0]);
       url = data[0].url;
+      title = data[0].title;
     }
-    console.log(url);
     return (
       <div className="App">
         <header className="App-header" onClick={this.requestPlanetData}>
@@ -60,7 +60,7 @@ class App extends Component {
         </header>
         {/* <TableOne data={this.state.data} /> */}
         <Form onComplete={this.handleSubmit} />
-        <img src={url} alt="test" />
+        <img src={url} alt={title} />
       </div>
     );
   }
