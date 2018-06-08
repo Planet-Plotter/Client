@@ -51,9 +51,12 @@ class App extends Component {
 
     let url = null;
     let title = null;
+    let explanation = null;
+
     if (data.length > 0) {
       url = data[0].url;
       title = data[0].title;
+      explanation = data[0].explanation;
     }
     return (
       <div className="App">
@@ -63,6 +66,7 @@ class App extends Component {
         {/* <TableOne data={this.state.data} /> */}
         <Form onComplete={this.handleSubmit} />
         <img src={url} alt={title} />
+        <p>{explanation}</p>
       </div>
     );
   }
