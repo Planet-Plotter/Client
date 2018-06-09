@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import superagent from 'superagent';
 
 import TableOne from '../table';
+import Modal from '../modal';
 import Form from '../form';
 import './App.css';
 
@@ -30,8 +31,6 @@ class App extends Component {
       year,
      ] = values;
 
-     console.log(values);
-
     // Conversion for proper url API requirements in case day and month are less than 2 digits
     day = day.toString();
     month = month.toString();
@@ -42,6 +41,13 @@ class App extends Component {
     const url = `https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&start_date=${year}-${month}-${day}&end_date=${year}-${month}-${day}`;
 
     this.requestPlanetData(url);
+  }
+
+  handleImgClick = () => {
+    console.log('hit img click');
+    this.setState({
+      hdurl: this.state.data[0].hdurl,
+    });
   }
 
   render() {
@@ -65,8 +71,9 @@ class App extends Component {
         </header>
         {/* <TableOne data={this.state.data} /> */}
         <Form onComplete={this.handleSubmit} />
-        <img src={url} alt={title} />
+        <img src={url} alt={title} onClick={this.handleImgClick}/>
         <p>{explanation}</p>
+        <Modal hdurl={this.state.hdurl}/>
       </div>
     );
   }
