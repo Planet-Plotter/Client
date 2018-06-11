@@ -11,6 +11,8 @@ class App extends Component {
   // This means no need for a constructor or props here
   state = {
     data: [],
+    hdurl: '',
+    modalIsOpen: false,
   };
 
   requestPlanetData = (queryUrl) => {
@@ -19,6 +21,7 @@ class App extends Component {
       .then(response => {
         this.setState({
           data: response.body,
+          hdurl: response.body[0].hdurl,
         });
       })
       .catch(console.log);
@@ -45,9 +48,16 @@ class App extends Component {
 
   handleImgClick = () => {
     console.log('hit img click');
-    this.setState({
-      hdurl: this.state.data[0].hdurl,
-    });
+
+    if (this.state.modalIsOpen) {
+      this.setState({
+        modalIsOpen: false,
+      });
+    } else {
+      this.setState({
+        modalIsOpen: true,
+      });
+    }
   }
 
   render() {
@@ -71,9 +81,15 @@ class App extends Component {
         </header>
         {/* <TableOne data={this.state.data} /> */}
         <Form onComplete={this.handleSubmit} />
-        <img src={url} alt={title} onClick={this.handleImgClick}/>
+
+        <img
+          src={url}
+          alt={title}
+          onClick={this.handleImgClick}
+        />
+
         <p>{explanation}</p>
-        <Modal hdurl={this.state.hdurl}/>
+        <Modal isOpen={this.state.modalIsOpen} hdurl={this.state.hdurl} handleClick={this.handleImgClick} />
       </div>
     );
   }
