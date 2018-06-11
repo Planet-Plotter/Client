@@ -5,20 +5,20 @@ const currentDate = new Date();
 
 class MyForm extends Component {
   state = {
-    year: 1995,
-    month: 6,
     day: 16,
+    month: 6,
+    year: 1995,
   }
 
-  // componentDidMount = () => {
-  //   const currDate = this.currentDate();
-  //   console.log('CurrDate after mount: ', currDate);
-  //   this.setState({
-  //     year:currDate[0],
-  //     month:currDate[1],
-  //     day:currDate[2],
-  //   })
-  // }
+  componentDidMount = () => {
+    const {
+      day,
+      month,
+      year,
+    } = this.state;
+
+    this.props.onComplete([day, month, year]);
+  }
 
   createYearOptions = () => {
     const currentYear = this.currentDate()[0];
