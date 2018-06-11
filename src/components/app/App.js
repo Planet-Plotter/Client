@@ -16,7 +16,6 @@ class App extends Component {
   };
 
   requestPlanetData = (queryUrl) => {
-    console.log('Requested URL: ', queryUrl);
     superagent.get(queryUrl)
       .then(response => {
         this.setState({
@@ -32,7 +31,7 @@ class App extends Component {
       day,
       month,
       year,
-     ] = values;
+    ] = values;
 
     // Conversion for proper url API requirements in case day and month are less than 2 digits
     day = day.toString();
@@ -41,14 +40,12 @@ class App extends Component {
     if (day.length < 2) day = `0${day}`;
     if (month.length < 2) month = `0${month}`;
 
-    const url = `https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&start_date=${year}-${month}-${day}&end_date=${year}-${month}-${day}`;
+    const url = `https://api.nasa.gov/planetary/apod?api_key=UpQHlODpCJ11wBVTPjtMqf9FZ8JS64dbO4MsV2Sa&start_date=${year}-${month}-${day}&end_date=${year}-${month}-${day}`;
 
     this.requestPlanetData(url);
   }
 
   handleImgClick = () => {
-    console.log('hit img click');
-
     if (this.state.modalIsOpen) {
       this.setState({
         modalIsOpen: false,
@@ -81,13 +78,12 @@ class App extends Component {
         </header>
         {/* <TableOne data={this.state.data} /> */}
         <Form onComplete={this.handleSubmit} />
-
         <img
+          className="response-img"
           src={url}
           alt={title}
           onClick={this.handleImgClick}
         />
-
         <p>{explanation}</p>
         <Modal isOpen={this.state.modalIsOpen} hdurl={this.state.hdurl} handleClick={this.handleImgClick} />
       </div>

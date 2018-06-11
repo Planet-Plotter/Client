@@ -150,7 +150,6 @@ class MyForm extends Component {
             id="select-year"
             name="year"
             onChange={this.handleSelectChange}
-            // defaultValue={currDate[0]}
           >
             {this.createYearOptions()}
           </select>
