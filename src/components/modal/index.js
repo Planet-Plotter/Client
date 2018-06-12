@@ -29,8 +29,8 @@ class Modal extends Component {
               
         <button>
           <svg className="gallery-arrow arrow-left" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 200">
-            <line x1="100" y1="0" x2="0" y2="100" stroke="black" strokeWidth="20" strokeLinecap="square" />
-            <line x1="0" y1="100" x2="100" y2="200" stroke="black" strokeWidth="20" strokeLinecap="square" />
+            <line x1="100" y1="0" x2="0" y2="100" stroke="black" strokeLinecap="square" />
+            <line x1="0" y1="100" x2="100" y2="200" stroke="black" strokeLinecap="square" />
           </svg>
 
         </button>
@@ -42,18 +42,18 @@ class Modal extends Component {
         
         <button>
           <svg className="gallery-arrow arrow-right" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 200">
-            <line x1="0" y1="0" x2="100" y2="100" stroke="black" strokeWidth="20" strokeLinecap="square" />
-            <line x1="100" y1="100" x2="0" y2="200" stroke="black" strokeWidth="20" strokeLinecap="square" />
+            <line x1="0" y1="0" x2="100" y2="100" stroke="black" strokeLinecap="square" />
+            <line x1="100" y1="100" x2="0" y2="200" stroke="black" strokeLinecap="square" />
           </svg>
         </button>
 
         <button
           id="button-modal-close"
-          onClick={this.props.handleClick}>
-          
-          <svg className="gallery-arrow arrow-right" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 200">
-            <line x1="0" y1="0" x2="100" y2="100" stroke="black" strokeWidth="20" strokeLinecap="square" />
-            <line x1="100" y1="100" x2="0" y2="200" stroke="black" strokeWidth="20" strokeLinecap="square" />
+          onClick={this.props.handleClick}
+        >
+          <svg className="gallery-arrow arrow-right" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 200 200">
+            <line x1="0" y1="0" x2="200" y2="200" stroke="black" strokeLinecap="square" />
+            <line x1="200" y1="0" x2="0" y2="200" stroke="black" strokeLinecap="square" />
           </svg>
         </button>
 

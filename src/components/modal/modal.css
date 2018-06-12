@@ -28,6 +28,10 @@ svg {
   transition: 100ms linear;
 }
 
+line {
+  stroke-width: 10px;
+}
+
 svg:hover {
   transform: scale(1.25);
 }
