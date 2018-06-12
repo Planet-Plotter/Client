@@ -11,13 +11,7 @@ class MyForm extends Component {
   }
 
   componentDidMount = () => {
-    const {
-      day,
-      month,
-      year,
-    } = this.state;
-
-    this.props.onComplete([day, month, year]);
+    this.props.onComplete([this.state.day, this.state.month, this.state.year]);
   }
 
   createYearOptions = () => {
@@ -101,33 +95,27 @@ class MyForm extends Component {
 
     this.setState({
       [name]: parseInt(value, 10),
+    }, ()=> {
+      this.props.onComplete([this.state.day, this.state.month, this.state.year]);
     });
   }
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const values = [
-      event.target.elements[0].value,
-      event.target.elements[1].value,
-      event.target.elements[2].value,
-    ];
-    this.setState({
-      day: parseInt(values[0], 10),
-      month: parseInt(values[1], 10),
-      year: parseInt(values[2], 10),
-    });
 
-    this.props.onComplete(values);
+    this.props.onComplete([this.state.day, this.state.month, this.state.year]);
   }
 
 
   render() {
     const currDate = this.currentDate();
-    console.log(currDate[2]);
 
     return (
       <div>
-        <form onSubmit={this.handleSubmit} id="planet-form" >
+        <form
+          id="planet-form"
+          onSubmit={this.handleSubmit}
+        >
           <select
             key={1}
             id="select-day"
