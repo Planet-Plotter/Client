@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import superagent from 'superagent';
 
-import TableOne from '../table';
+// import TableOne from '../table';
 import Modal from '../modal';
 import Form from '../form';
 import './App.css';
@@ -78,6 +78,7 @@ class App extends Component {
         </header>
         {/* <TableOne data={this.state.data} /> */}
         <Form onComplete={this.handleSubmit} />
+        <h5>Click the Image for a Sliding Gallery</h5>
         <img
           className="response-img"
           src={url}
