@@ -10,7 +10,7 @@ class Modal extends Component {
       top: '0px',
       left: '0px',
       zIndex: '9998',
-      background: 'rgba(0, 0, 0, 0.3)',
+      background: 'rgba(0, 0, 0, 0.6)',
     } : null;
 
     const imgStyle = this.props.isOpen ? {

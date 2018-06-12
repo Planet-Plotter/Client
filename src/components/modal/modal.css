@@ -1,3 +1,8 @@
 .modal {
   cursor: pointer;
+  
+}
+
+img {
+  border: solid #222 4px;
 }

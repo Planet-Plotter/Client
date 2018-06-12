@@ -85,7 +85,8 @@ class App extends Component {
           onClick={this.handleImgClick}
         />
         <p>{explanation}</p>
-        <Modal isOpen={this.state.modalIsOpen} hdurl={this.state.hdurl} handleClick={this.handleImgClick} />
+        { this.state.modalIsOpen ? 
+          <Modal isOpen={this.state.modalIsOpen} hdurl={this.state.hdurl} handleClick={this.handleImgClick} /> : null }
       </div>
     );
   }

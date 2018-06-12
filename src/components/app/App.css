@@ -3,15 +3,10 @@
   height: 100%;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
 .App-header {
-  background-color: #222;
-  height: 50px;
-  padding: 20px;
+  background-color: #333;
+  min-height: 6vh;
+  padding: 1vh;
   color: white;
 }
 
@@ -28,6 +23,14 @@
   cursor: pointer;
   max-height: 500px;
   width: auto;
+  border: solid #222 4px;
+}
+
+p {
+  padding: 10px;
+  background: rgb(200, 200, 200);
+  max-width: 500px;
+  margin: 10px auto 10px auto;
 }
 
 @keyframes App-logo-spin {
