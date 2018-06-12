@@ -74,7 +74,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">React Table Test</h1>
+          <h1 className="App-title"> React - Astronomy Picture of the Day</h1>
         </header>
         {/* <TableOne data={this.state.data} /> */}
         <Form onComplete={this.handleSubmit} />

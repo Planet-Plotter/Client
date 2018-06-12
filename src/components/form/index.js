@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import './form.css';
 
-const currentDate = new Date();
-
 class MyForm extends Component {
   state = {
     day: 16,
@@ -15,7 +13,7 @@ class MyForm extends Component {
   }
 
   createYearOptions = () => {
-    const currentYear = this.currentDate()[0];
+    const currentYear = this.currentDate()[2];
 
     const options = [];
     for (let i = 1995; i <= currentYear; i++) {
@@ -25,13 +23,13 @@ class MyForm extends Component {
   }
 
   createMonthOptions = () => {
-    const currYear = this.currentDate()[0];
+    const currYear = this.currentDate()[2];
     const selectedYear = this.state.year;
     let maxMonth = 12;
     let minMonth = 1;
 
     if (selectedYear === currYear) {
-      maxMonth = this.currentDate()[1];
+      maxMonth = this.currentDate()[1]; //eslint-disable-line
     }
 
     if (selectedYear === 1995) {
@@ -46,14 +44,13 @@ class MyForm extends Component {
   }
 
   createDayOptions = () => {
-    const currYear = this.currentDate()[0];
+    const currYear = this.currentDate()[2];
     const currMonth = this.currentDate()[1];
     const selectedYear = this.state.year;
     const selectedMonth = this.state.month;
     let maxDay = 31;
     let minDay = 1;
 
-    // TODO: limit days of month depending on which month is selected
     if ([4, 6, 9, 11].indexOf(selectedMonth) > -1) {
       maxDay = 30;
     } else if (selectedMonth === 2) {
@@ -67,7 +64,8 @@ class MyForm extends Component {
     }
 
     if (selectedYear === currYear) {
-      maxDay = this.currentDate()[2];
+      console.log('HIT MaxDay changer');
+      maxDay = this.currentDate()[0]; // eslint-disable-line
     }
 
     if (selectedYear === 1995) {
@@ -76,40 +74,90 @@ class MyForm extends Component {
 
     const options = [];
     for (let i = minDay; i <= maxDay; i++) {
-      options.push(<option key={i} value={i}>{i}</option>);
+      if (this.state.year === 1995 && i === minDay) {
+        console.log('Hit MIN option for Day');
+        options.push(<option selected key={i} value={i}>{i}</option>);
+      } else if (this.state.year === currYear && i === maxDay) {
+        console.log('Hit MAX option for Day');
+        options.push(<option selected key={i} value={i}>{i}</option>);
+      } else {
+        options.push(<option key={i} value={i}>{i}</option>);
+      }
     }
     return options;
   }
 
   currentDate = () => {
     const dateObj = new Date();
-    const month = dateObj.getUTCMonth() + 1;
-    const day = dateObj.getUTCDate();
-    const year = dateObj.getUTCFullYear();
+    const month = dateObj.getMonth() + 1;
+    const day = dateObj.getDate();
+    const year = dateObj.getFullYear();
 
-    return [year, month, day];
+    return [day, month, year];
   }
 
   handleSelectChange = (event) => {
     const { name, value } = event.target;
 
+    const ValidatedDateRequest = () => {
+      console.log('Hit validation Request');
+      const [
+        currDay,
+        currMonth,
+        currYear,
+      ] = this.currentDate();
+
+      const selectedDate = [this.state.day, this.state.month, this.state.year];
+      console.log('Date BEFORE Validation: ', selectedDate);
+
+      // Check for minimum year
+      if (selectedDate[2] === 1995) {
+        if (selectedDate[1] < 6) {
+          // Set month to minimum month allowed
+          selectedDate[1] = 6;
+          this.setState({
+            month: 6,
+          });
+        } 
+        if (selectedDate[0] < 16) {
+          // Set day to minimum day allowed
+          selectedDate[0] = 16;
+          this.setState({
+            day: 16,
+          });
+        }
+      }
+      
+      // Check for Maximum year based on current date
+      if (selectedDate[2] === currYear) {
+        console.log('Hit max year in validation');
+        if (selectedDate[1] > currMonth) {
+          // Set month to max month allowed
+          selectedDate[1] = currMonth;
+          this.setState({
+            month: currMonth,
+          });
+        } 
+        if (selectedDate[0] > currDay) {
+          selectedDate[0] = currDay;
+          this.setState({
+            day: currDay,
+          });
+        }
+      }
+      console.log('Date AFTER Validation: ', selectedDate);
+      return selectedDate;
+    };
+
     this.setState({
       [name]: parseInt(value, 10),
-    }, ()=> {
-      this.props.onComplete([this.state.day, this.state.month, this.state.year]);
+    }, () => {
+      this.props.onComplete(ValidatedDateRequest());
     });
-  }
-
-  handleSubmit = (event) => {
-    event.preventDefault();
-
-    this.props.onComplete([this.state.day, this.state.month, this.state.year]);
   }
 
 
   render() {
-    const currDate = this.currentDate();
-
     return (
       <div>
         <form
@@ -141,8 +189,7 @@ class MyForm extends Component {
           >
             {this.createYearOptions()}
           </select>
-      </form>
-        <button type="submit" form="planet-form" value="Submit"> Go! </button>
+        </form>
       </div>
     );
   }
