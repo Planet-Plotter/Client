@@ -18,7 +18,7 @@
   font-size: large;
 }
 
-h5 {
+h4, h5, h6 {
   margin: 10px;
 }
 
@@ -26,14 +26,16 @@ h5 {
   position: relative;
   cursor: pointer;
   max-height: 500px;
+  max-width: 100%;
   width: auto;
   border: solid #222 4px;
+  box-sizing: border-box;
 }
 
 p {
   padding: 10px;
   background: rgb(200, 200, 200);
-  max-width: 500px;
+  max-width: 600px;
   margin: 10px auto 10px auto;
 }
 

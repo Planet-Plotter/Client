@@ -11,7 +11,6 @@ class App extends Component {
   // This means no need for a constructor or props here
   state = {
     data: [],
-    hdurl: '',
     modalIsOpen: false,
   };
 
@@ -19,8 +18,7 @@ class App extends Component {
     superagent.get(queryUrl)
       .then(response => {
         this.setState({
-          data: response.body,
-          hdurl: response.body[0].hdurl,
+          data: response.body[0],
         });
       })
       .catch(console.log);
@@ -62,14 +60,12 @@ class App extends Component {
       data, 
     } = this.state;
 
-    let url = null;
-    let title = null;
-    let explanation = null;
+    let url, title, explanation = null;
 
-    if (data.length > 0) {
-      url = data[0].url;
-      title = data[0].title;
-      explanation = data[0].explanation;
+    if (data) {
+      url = data.url;
+      title = data.title;
+      explanation = data.explanation;
     }
     return (
       <div className="App">
@@ -78,16 +74,22 @@ class App extends Component {
         </header>
         {/* <TableOne data={this.state.data} /> */}
         <Form onComplete={this.handleSubmit} />
-        <h5>Click the Image for a Sliding Gallery</h5>
-        <img
+        <h6>Click the Image for a Sliding Gallery</h6>
+        {/* TODO: ADD conditonal to have a loading bar if image is loading, else display image */}
+        <img //eslint-disable-line
           className="response-img"
           src={url}
           alt={title}
           onClick={this.handleImgClick}
         />
+        <h4>{title}</h4>
         <p>{explanation}</p>
         { this.state.modalIsOpen ? 
-          <Modal isOpen={this.state.modalIsOpen} hdurl={this.state.hdurl} handleClick={this.handleImgClick} /> : null }
+          <Modal
+            isOpen={this.state.modalIsOpen}
+            data={this.state.data}
+            handleClick={this.handleImgClick}
+          /> : null }
       </div>
     );
   }

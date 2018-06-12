@@ -164,6 +164,7 @@ class MyForm extends Component {
           id="planet-form"
           onSubmit={this.handleSubmit}
         >
+          <label htmlFor="select-day">Day</label>
           <select
             key={1}
             id="select-day"
@@ -172,7 +173,8 @@ class MyForm extends Component {
           >
             {this.createDayOptions()}
           </select>
-  
+          
+          <label htmlFor="select-month">Month</label>
           <select
             key={2}
             id="select-month" 
@@ -181,6 +183,8 @@ class MyForm extends Component {
           >
             {this.createMonthOptions()}
           </select>
+          
+          <label htmlFor="select-year">Year</label>
           <select
             key={3}
             id="select-year"
