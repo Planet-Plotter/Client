@@ -43,7 +43,7 @@ class App extends Component {
     this.requestPlanetData(url);
   }
 
-  handleImgClick = () => {
+  toggleModal = () => {
     if (this.state.modalIsOpen) {
       this.setState({
         modalIsOpen: false,
@@ -72,24 +72,28 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title"> React - Astronomy Picture of the Day</h1>
         </header>
+        
         {/* <TableOne data={this.state.data} /> */}
-        <Form onComplete={this.handleSubmit} />
-        <h6>Click the Image for a Sliding Gallery</h6>
-        {/* TODO: ADD conditonal to have a loading bar if image is loading, else display image */}
-        <img //eslint-disable-line
-          className="response-img"
-          src={url}
-          alt={title}
-          onClick={this.handleImgClick}
-        />
-        <h4>{title}</h4>
-        <p>{explanation}</p>
-        { this.state.modalIsOpen ? 
-          <Modal
-            isOpen={this.state.modalIsOpen}
-            data={this.state.data}
-            handleClick={this.handleImgClick}
-          /> : null }
+        <main>
+          <Form onComplete={this.handleSubmit} />
+          <h6>Click the Image for a Sliding Gallery</h6>
+          {/* TODO: ADD conditonal to have a loading bar if image is loading, else display image */}
+          <img //eslint-disable-line
+            className="response-img"
+            src={url}
+            alt={title}
+            onClick={this.toggleModal}
+          />
+          <h4>{title}</h4>
+          <p>{explanation}</p>
+          { this.state.modalIsOpen ? 
+            <Modal
+              isOpen={this.state.modalIsOpen}
+              data={this.state.data}
+              closeModal={this.toggleModal}
+              onRequestClose={this.toggleModal}
+            /> : null }
+        </main>       
       </div>
     );
   }

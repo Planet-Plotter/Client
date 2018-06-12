@@ -5,7 +5,12 @@
   align-items: center;
   grid-template-rows: 100%;
   grid-template-columns: 1fr 1fr 1fr;
-  max-width: 100%;
+  width: 100%;
+  height: 90%;
+  top: 100px;
+  left: 0px;
+  background: rgba(250, 250, 250, 0.95);
+  zIndex: 9999;
 }
 
 /* * {
@@ -63,6 +68,10 @@ article {
 
 img {
   border: solid #222 4px;
+  maxHeight: 80%;
+  height: auto;
+  zIndex: 9999;
+  background: #fff;
 }
 
 line {

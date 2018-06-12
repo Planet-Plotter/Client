@@ -3,28 +3,9 @@ import './modal.css';
 
 class Modal extends Component {
   render() {
-    const backGroundStyle = this.props.isOpen ? {
-      width: '100%',
-      height: '100%',
-      top: '0px',
-      left: '0px',
-      zIndex: '9998',
-      background: 'rgba(250, 250, 250, 0.95)',
-    } : null;
-
-    const imgStyle = this.props.isOpen ? {
-      maxHeight: '80%',
-      height: 'auto',
-      zIndex: '9999',
-      background: '#fff',
-    } : null;
-
-    const imgSource = this.props.isOpen ? this.props.data.hdurl : null;
-
     return (
       <div
         className="modal"
-        style={backGroundStyle}
       >
               
         <button className="modal-button modal-left" >
@@ -36,11 +17,10 @@ class Modal extends Component {
         </button>
         <article>
           <h4>{this.props.data.title} - {this.props.data.date}</h4>
-        <img
-          style={imgStyle}
-          src={imgSource}
-          alt={this.props.text}
-        />
+          <img
+            src={this.props.data.hdurl}
+            alt={this.props.text}
+          />
         </article>
 
         
@@ -53,7 +33,7 @@ class Modal extends Component {
 
         <button
           className="modal-button modal-close"
-          onClick={this.props.handleClick}
+          onClick={this.props.closeModal}
         >
           <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 200 200">
             <line x1="0" y1="0" x2="200" y2="200" stroke="black" strokeLinecap="square" />

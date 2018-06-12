@@ -5,7 +5,7 @@
 
 .App-header {
   background-color: #333;
-  min-height: 6vh;
+  height: 100px;
   padding: 1vh;
   color: white;
 }
@@ -16,6 +16,10 @@
 
 .App-intro {
   font-size: large;
+}
+
+main {
+  margin: 1vw;
 }
 
 h4, h5, h6 {
