@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import PreviousSlider from '../previous-slider';
+import NextSlider from '../next-slider';
+import CloseButton from '../close-button';
 import './modal.css';
 
 class Modal extends Component {
@@ -7,17 +10,7 @@ class Modal extends Component {
       <div
         className="modal"
       >
-              
-        <button
-          className="modal-button modal-left"
-          onClick={this.props.handlePreviousImg}
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 200">
-            <line x1="100" y1="0" x2="0" y2="100" stroke="black" strokeLinecap="square" />
-            <line x1="0" y1="100" x2="100" y2="200" stroke="black" strokeLinecap="square" />
-          </svg>
-
-        </button>
+        <PreviousSlider handlePreviousImg={this.props.handlePreviousImg} />
         <article>
           <h4>{this.props.data.title} - {this.props.data.date}</h4>
           <img
@@ -26,28 +19,8 @@ class Modal extends Component {
             alt={this.props.text}
           />
         </article>
-
-        
-        <button
-          className="modal-button modal-right"
-          onClick={this.props.handleNextImg}
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 200">
-            <line x1="0" y1="0" x2="100" y2="100" stroke="black" strokeLinecap="square" />
-            <line x1="100" y1="100" x2="0" y2="200" stroke="black" strokeLinecap="square" />
-          </svg>
-        </button>
-
-        <button
-          className="modal-button modal-close"
-          onClick={this.props.closeModal}
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 200 200">
-            <line x1="0" y1="0" x2="200" y2="200" stroke="black" strokeLinecap="square" />
-            <line x1="200" y1="0" x2="0" y2="200" stroke="black" strokeLinecap="square" />
-          </svg>
-        </button>
-
+        <NextSlider handleNextImg={this.props.handleNextImg} />
+        <CloseButton closeModal={this.props.closeModal}/>
       </div>
     );
   }
