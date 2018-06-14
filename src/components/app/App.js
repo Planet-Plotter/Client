@@ -24,7 +24,13 @@ class App extends Component {
           data: response.body[0],
         });
       })
-      .catch(console.log);
+      .catch(error => {
+        console.log(error);
+        this.setState({
+          modalIsOpen: true,
+          error: 'No Image exists for this Date. Please select another date or go to the next image.',
+        });
+      });
   }
 
   handleSubmit = (values) => {
@@ -155,6 +161,7 @@ class App extends Component {
             <Modal
               isOpen={this.state.modalIsOpen}
               data={this.state.data}
+              error={this.state.error}
               closeModal={this.toggleModal}
               handleNextImg={this.handleNextImg}
               handlePreviousImg={this.handlePreviousImg}

@@ -49,6 +49,8 @@ h4, h5, h6 {
   border: solid #222 4px;
   box-sizing: border-box;
   margin: 10px auto;
+  box-shadow: 6px 6px 6px rgb(53, 107, 104);
+
 }
 
 p {
