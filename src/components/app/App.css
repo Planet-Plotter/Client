@@ -1,3 +1,7 @@
+* {
+  border: solid green 0.5px;
+}
+
 .App {
   text-align: center;
   height: 100%;
@@ -20,6 +24,11 @@
 
 main {
   margin: 1vw;
+}
+
+#img-navigation {
+  display: inline-block;
+  margin: 5px auto 5px auto;
 }
 
 h4, h5, h6 {
@@ -47,3 +56,55 @@ p {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+
+/* CSS for the image navigations */
+/* 
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  grid-row: 1;
+  outline: none;
+}
+
+.modal-button {
+  position: relative;
+}
+
+.modal-left {
+  justify-self: end;
+  grid-column: 1;
+}
+
+.modal-right {
+  grid-column: 3/4;
+  justify-self: start;
+}
+
+.modal-close {
+  grid-column: 3;
+  justify-self: center;
+  align-self: flex-start;
+  top: 5vh;
+  right: 5vh;
+  padding-left: 2vw;
+}
+
+svg {
+  color: black;
+  z-index: 9999;
+  margin: 2vw;
+  width: 50px;
+  height: 50px;
+  transition: 100ms linear;
+}
+
+
+line {
+  stroke-width: 10px;
+}
+
+svg:hover {
+  transform: scale(1.25);
+} */

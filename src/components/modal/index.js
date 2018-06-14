@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import PreviousSlider from '../previous-slider';
 import NextSlider from '../next-slider';
 import CloseButton from '../close-button';
-import './modal.css';
 
 class Modal extends Component {
+  componentDidMount() {
+    console.log('Modal Mounted');
+    import('./modal.css');
+  }
   render() {
     return (
       <div

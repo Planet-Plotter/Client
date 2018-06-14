@@ -5,6 +5,8 @@ import superagent from 'superagent';
 import Modal from '../modal';
 import Form from '../form';
 import './App.css';
+import PreviousSlider from '../previous-slider';
+import NextSlider from '../next-slider';
 
 
 class App extends Component {
@@ -128,9 +130,17 @@ class App extends Component {
         
         {/* <TableOne data={this.state.data} /> */}
         <main>
-          <Form onComplete={this.handleSubmit} />
-          <h6>Click the Image for a Sliding Gallery</h6>
+          
+          <div id="img-navigation">
+            <PreviousSlider handlePreviousImg={this.handlePreviousImg}/>
+            <Form onComplete={this.handleSubmit} />
+            <NextSlider handleNextImg={this.handleNextImg}/>
+          </div>            
+
+          <h5>Click the Image for a Larger View</h5>
+
           {/* TODO: ADD conditonal to have a loading bar if image is loading, else display image */}
+
           <img //eslint-disable-line
             className="response-img"
             src={url}
