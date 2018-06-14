@@ -77,8 +77,8 @@ class MyForm extends Component {
     for (let i = minDay; i <= maxDay; i++) {
       if ((this.state.year === 1995 && i === minDay) 
       || (this.state.year === currYear && i === maxDay)
-        || (this.state.year === i)) {
-        console.log('HIT Selected Option Redner');
+        || (this.state.day === i)) {
+        console.log('HIT Selected Option Render');
         options.push(<option selected="selected" key={i} value={i}>{i}</option>);
       // } else if (this.state.year === currYear && i === maxDay) {
       //   options.push(<option selected key={i} value={i}>{i}</option>);
@@ -109,7 +109,6 @@ class MyForm extends Component {
       ] = this.currentDate();
 
       const selectedDate = [this.state.day, this.state.month, this.state.year];
-      console.log('Validated BEFORE: ', selectedDate);
 
       // Check for minimum year
       if (selectedDate[2] === 1995) {
@@ -150,7 +149,13 @@ class MyForm extends Component {
     this.setState({
       [name]: parseInt(value, 10),
     }, () => {
-      this.props.onComplete(ValidatedDateRequest());
+      const newDateRequested = ValidatedDateRequest();
+      this.props.onComplete(newDateRequested);
+      this.setState({
+        day: newDateRequested[0],
+        month: newDateRequested[1],
+        year: newDateRequested[2],
+      });
     });
   }
 
@@ -178,6 +183,7 @@ class MyForm extends Component {
             id="select-month" 
             name="month"
             onChange={this.handleSelectChange}
+            defaultValue={this.state.month}
           >
             {this.createMonthOptions()}
           </select>
