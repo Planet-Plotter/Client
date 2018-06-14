@@ -12,7 +12,7 @@ class NextSlider extends Component {
           <line x1="100" y1="100" x2="0" y2="200" stroke="black" strokeLinecap="square" />
         </svg>
       </button>
-    )
+    );
   }
 }
 

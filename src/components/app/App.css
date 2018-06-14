@@ -1,6 +1,6 @@
-* {
+/* * {
   border: solid green 0.5px;
-}
+} */
 
 .App {
   text-align: center;
@@ -9,7 +9,7 @@
 
 .App-header {
   background-color: #333;
-  height: 100px;
+  height: 75px;
   padding: 1vh;
   color: white;
 }
@@ -27,8 +27,13 @@ main {
 }
 
 #img-navigation {
-  display: inline-block;
+  /* display: block; */
   margin: 5px auto 5px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 600px;
+  max-height: 75px;
 }
 
 h4, h5, h6 {
@@ -43,6 +48,7 @@ h4, h5, h6 {
   width: auto;
   border: solid #222 4px;
   box-sizing: border-box;
+  margin: 10px auto;
 }
 
 p {
@@ -50,6 +56,8 @@ p {
   background: rgb(200, 200, 200);
   max-width: 600px;
   margin: 10px auto 10px auto;
+  box-shadow: 6px 6px 6px rgb(53, 107, 104);
+
 }
 
 @keyframes App-logo-spin {
@@ -59,13 +67,17 @@ p {
 
 
 /* CSS for the image navigations */
-/* 
+
 button {
   background: none;
   border: none;
   cursor: pointer;
   grid-row: 1;
   outline: none;
+  width: 65px;
+  height: 65px;
+  margin: 10px;
+
 }
 
 .modal-button {
@@ -94,7 +106,7 @@ button {
 svg {
   color: black;
   z-index: 9999;
-  margin: 2vw;
+  margin: 1px auto;
   width: 50px;
   height: 50px;
   transition: 100ms linear;
@@ -107,4 +119,4 @@ line {
 
 svg:hover {
   transform: scale(1.25);
-} */
+}

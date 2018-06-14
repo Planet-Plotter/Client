@@ -4,9 +4,9 @@ import superagent from 'superagent';
 // import TableOne from '../table';
 import Modal from '../modal';
 import Form from '../form';
-import './App.css';
 import PreviousSlider from '../previous-slider';
 import NextSlider from '../next-slider';
+import './App.css';
 
 
 class App extends Component {
@@ -28,11 +28,13 @@ class App extends Component {
   }
 
   handleSubmit = (values) => {
+    console.log(values);
     let [
       day,
       month,
-      year,
     ] = values;
+
+    const year = values[2];
 
     this.setState({
       day,
@@ -113,28 +115,28 @@ class App extends Component {
       data, 
     } = this.state;
 
-    let url, 
+    let url, //eslint-disable-line
       title, 
       explanation = null;
 
     if (data) {
-      url = data.url;
-      title = data.title;
-      explanation = data.explanation;
+      url = data.url; //eslint-disable-line
+      title = data.title;//eslint-disable-line
+      explanation = data.explanation;//eslint-disable-line
     }
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title"> React - Astronomy Picture of the Day</h1>
+          <h1 className="App-title"> Astronomy Picture of the Day</h1>
         </header>
         
         {/* <TableOne data={this.state.data} /> */}
         <main>
           
           <div id="img-navigation">
-            <PreviousSlider handlePreviousImg={this.handlePreviousImg}/>
+            <PreviousSlider handlePreviousImg={this.handlePreviousImg} />
             <Form onComplete={this.handleSubmit} />
-            <NextSlider handleNextImg={this.handleNextImg}/>
+            <NextSlider handleNextImg={this.handleNextImg} />
           </div>            
 
           <h5>Click the Image for a Larger View</h5>

@@ -1,8 +1,11 @@
 form {
-  margin: 10px auto 10px auto;
+  /* margin: 10px auto 10px auto; */
   background: gray;
-  max-width: 400px;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  max-width: 600px;
+  min-width: 400px;
+  max-height: inherit;
+  font-size: 1;
+  box-shadow: 6px 6px 6px rgb(53, 107, 104);
 }
 
 select {

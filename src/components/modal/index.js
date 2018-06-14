@@ -23,7 +23,7 @@ class Modal extends Component {
           />
         </article>
         <NextSlider handleNextImg={this.props.handleNextImg} />
-        <CloseButton closeModal={this.props.closeModal}/>
+        <CloseButton closeModal={this.props.closeModal} />
       </div>
     );
   }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class PreviousSlider extends Component {
   render() {
-    return(
+    return (
       <button
         className="modal-button modal-left"
         onClick={this.props.handlePreviousImg}
