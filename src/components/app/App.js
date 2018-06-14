@@ -6,6 +6,7 @@ import Modal from '../modal';
 import Form from '../form';
 import './App.css';
 
+
 class App extends Component {
   // babel-preset - stage - 2 includes class features that implicitly bind to the instance
   // This means no need for a constructor or props here
@@ -31,6 +32,12 @@ class App extends Component {
       year,
     ] = values;
 
+    this.setState({
+      day,
+      month,
+      year,
+    });
+
     // Conversion for proper url API requirements in case day and month are less than 2 digits
     day = day.toString();
     month = month.toString();
@@ -41,6 +48,50 @@ class App extends Component {
     const url = `https://api.nasa.gov/planetary/apod?api_key=UpQHlODpCJ11wBVTPjtMqf9FZ8JS64dbO4MsV2Sa&start_date=${year}-${month}-${day}&end_date=${year}-${month}-${day}`;
 
     this.requestPlanetData(url);
+  }
+
+  handlePreviousImg = () => {
+    this.handleSubmit([this.state.day - 1, this.state.month, this.state.year]);
+  }
+
+  handleNextImg = () => {
+    let {
+      month,
+      year,
+    } = this.state;
+
+    let nextDay = this.state.day + 1;
+    // if next nextDay is greater than 29
+    // and if current month is  4,6,9,11
+    // make next nextDay 1 and +1 month
+
+    if (month === 2) {
+      if (nextDay === 29) {
+        if (!([1996, 2000, 2004, 2008, 2012, 2016, 2020, 2024, 2028].indexOf(year) > -1)) {
+          nextDay = 1;
+          month++;
+        }
+      } else if (nextDay === 30) {
+        nextDay = 1;
+        month++;
+      }
+    } else if (nextDay === 31) {
+      if ([4, 6, 9, 11].indexOf(month) > -1) {
+        nextDay = 1;
+        month++;
+      }
+    } else if (nextDay === 32) {
+      nextDay = 1;
+      if (month === 12) {
+        month = 1;
+        year++;
+      } else {
+        month++;
+      }
+    }
+
+
+    this.handleSubmit([nextDay, month, year]);
   }
 
   toggleModal = () => {
@@ -60,7 +111,9 @@ class App extends Component {
       data, 
     } = this.state;
 
-    let url, title, explanation = null;
+    let url, 
+      title, 
+      explanation = null;
 
     if (data) {
       url = data.url;
@@ -91,7 +144,8 @@ class App extends Component {
               isOpen={this.state.modalIsOpen}
               data={this.state.data}
               closeModal={this.toggleModal}
-              onRequestClose={this.toggleModal}
+              handleNextImg={this.handleNextImg}
+              handlePreviousImg={this.handlePreviousImg}
             /> : null }
         </main>       
       </div>

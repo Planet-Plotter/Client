@@ -66,11 +66,11 @@ article {
   /* max-width: 100%; */
 }
 
-img {
+.modal-img {
   border: solid #222 4px;
-  maxHeight: 80%;
+  max-height: 80%;
   height: auto;
-  zIndex: 9999;
+  z-Index: 9999;
   background: #fff;
 }
 
