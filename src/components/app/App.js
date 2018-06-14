@@ -22,13 +22,14 @@ class App extends Component {
       .then(response => {
         this.setState({
           data: response.body[0],
+          error: '',
         });
       })
       .catch(error => {
         console.log(error);
         this.setState({
           modalIsOpen: true,
-          error: 'No Image exists for this Date. Please select another date or go to the next image.',
+          error: 'Oh no! No APOD image exists for this date. Please select another date or go to the next image.',
         });
       });
   }
@@ -62,6 +63,7 @@ class App extends Component {
 
   handlePreviousImg = () => {
     this.handleSubmit([this.state.day - 1, this.state.month, this.state.year]);
+    // TODO: ADD logic for reverse of NextImg day checker
   }
 
   handleNextImg = () => {
@@ -71,10 +73,8 @@ class App extends Component {
     } = this.state;
 
     let nextDay = this.state.day + 1;
-    // if next nextDay is greater than 29
-    // and if current month is  4,6,9,11
-    // make next nextDay 1 and +1 month
 
+    // Logic to Check for proper day advancement
     if (month === 2) {
       if (nextDay === 29) {
         if (!([1996, 2000, 2004, 2008, 2012, 2016, 2020, 2024, 2028].indexOf(year) > -1)) {
@@ -99,7 +99,6 @@ class App extends Component {
         month++;
       }
     }
-
 
     this.handleSubmit([nextDay, month, year]);
   }

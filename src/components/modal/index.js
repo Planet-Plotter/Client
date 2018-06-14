@@ -5,7 +5,6 @@ import CloseButton from '../close-button';
 
 class Modal extends Component {
   componentDidMount() {
-    console.log('Modal Mounted');
     import('./modal.css');
   }
   render() {

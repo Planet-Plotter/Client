@@ -64,8 +64,9 @@ class MyForm extends Component {
     }
 
     if (selectedYear === currYear) {
-      console.log('HIT MaxDay changer');
-      maxDay = this.currentDate()[0]; // eslint-disable-line
+      if (selectedMonth === currMonth) {
+        maxDay = this.currentDate()[0]; // eslint-disable-line
+      }
     }
 
     if (selectedYear === 1995) {
@@ -74,12 +75,13 @@ class MyForm extends Component {
 
     const options = [];
     for (let i = minDay; i <= maxDay; i++) {
-      if (this.state.year === 1995 && i === minDay) {
-        console.log('Hit MIN option for Day');
-        options.push(<option selected key={i} value={i}>{i}</option>);
-      } else if (this.state.year === currYear && i === maxDay) {
-        console.log('Hit MAX option for Day');
-        options.push(<option selected key={i} value={i}>{i}</option>);
+      if ((this.state.year === 1995 && i === minDay) 
+      || (this.state.year === currYear && i === maxDay)
+        || (this.state.year === i)) {
+        console.log('HIT Selected Option Redner');
+        options.push(<option selected="selected" key={i} value={i}>{i}</option>);
+      // } else if (this.state.year === currYear && i === maxDay) {
+      //   options.push(<option selected key={i} value={i}>{i}</option>);
       } else {
         options.push(<option key={i} value={i}>{i}</option>);
       }
@@ -100,7 +102,6 @@ class MyForm extends Component {
     const { name, value } = event.target;
 
     const ValidatedDateRequest = () => {
-      console.log('Hit validation Request');
       const [
         currDay,
         currMonth,
@@ -108,7 +109,7 @@ class MyForm extends Component {
       ] = this.currentDate();
 
       const selectedDate = [this.state.day, this.state.month, this.state.year];
-      console.log('Date BEFORE Validation: ', selectedDate);
+      console.log('Validated BEFORE: ', selectedDate);
 
       // Check for minimum year
       if (selectedDate[2] === 1995) {
@@ -129,23 +130,20 @@ class MyForm extends Component {
       }
       
       // Check for Maximum year based on current date
-      if (selectedDate[2] === currYear) {
-        console.log('Hit max year in validation');
-        if (selectedDate[1] > currMonth) {
-          // Set month to max month allowed
-          selectedDate[1] = currMonth;
-          this.setState({
-            month: currMonth,
-          });
-        } 
+      if (selectedDate[2] === currYear && selectedDate[1] >= currMonth) {
+        // Set month to max month allowed
+        selectedDate[1] = currMonth;
+        this.setState({
+          month: currMonth,
+        });
         if (selectedDate[0] > currDay) {
           selectedDate[0] = currDay;
           this.setState({
             day: currDay,
           });
         }
-      }
-      console.log('Date AFTER Validation: ', selectedDate);
+      } 
+      console.log('Validated AFTER: ', selectedDate);
       return selectedDate;
     };
 
