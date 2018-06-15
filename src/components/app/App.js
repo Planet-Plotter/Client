@@ -73,8 +73,37 @@ class App extends Component {
   }
 
   handlePreviousImg = () => {
-    this.handleSubmit([this.state.day - 1, this.state.month, this.state.year]);
-    // TODO: ADD logic for reverse of NextImg day checker
+    let {
+      month,
+      year,
+    } = this.state;
+
+    let previousDay = this.state.day - 1;
+
+    // Logic to Check for proper day decrement
+    if (previousDay === 0) {
+      if (month === 2 + 1) {
+        month--;
+        if (!([1996, 2000, 2004, 2008, 2012, 2016, 2020, 2024, 2028].indexOf(year) > -1)) {
+          previousDay = 28;
+        } else {
+          previousDay = 29;
+        }
+      } else if (month === 1) {
+        previousDay = 31;
+        month = 12;
+        year--;
+      // Adding 1 month as we are working backwards
+      } else if ([4 + 1, 6 + 1, 9 + 1, 11 + 1].indexOf(month) > -1) {
+        previousDay = 30;
+        month--;
+      } else {
+        previousDay = 31;
+        month--;
+      }
+    }
+
+    this.handleSubmit([previousDay, month, year]);
   }
 
   handleNextImg = () => {
