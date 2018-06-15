@@ -1,6 +1,7 @@
 {
   "name": "exoplanet",
   "version": "0.1.0",
+  "homepage":"https://www.sethdonohue.com/apod-gallery",
   "private": true,
   "dependencies": {
     "autoprefixer": "7.1.6",
