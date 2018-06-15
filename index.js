@@ -5,7 +5,7 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, 'build')));
 
-app.get('/', function (req, res) { //eslint-disable-line
+app.get('/*', function (req, res) { //eslint-disable-line
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
