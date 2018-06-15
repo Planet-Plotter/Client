@@ -10,3 +10,5 @@ app.get('/', function (req, res) { //eslint-disable-line
 });
 
 app.listen(9000);
+console.log('Server up and listening on Port 9000...');
+
