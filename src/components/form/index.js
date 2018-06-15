@@ -3,11 +3,16 @@ import './form.css';
 
 class MyForm extends Component {
   createYearOptions = () => {
-    const currentYear = this.currentDate()[2];
+    const currYear = this.currentDate()[2];
 
     const options = [];
-    for (let i = 1995; i <= currentYear; i++) {
-      options.push(<option key={i} value={i}>{i}</option>);
+
+    for (let i = 1995; i <= currYear; i++) {
+      if ((this.props.year === i)) {
+        options.push(<option selected="selected" key={i} value={i}>{i}</option>);
+      } else {
+        options.push(<option key={i} value={i}>{i}</option>);
+      }
     }
     return options;
   }
@@ -28,7 +33,11 @@ class MyForm extends Component {
 
     const options = [];
     for (let i = minMonth; i <= maxMonth; i++) {
-      options.push(<option key={i} value={i}>{i}</option>);
+      if ((this.props.month === i)) {
+        options.push(<option selected="selected" key={i} value={i}>{i}</option>);
+      } else {
+        options.push(<option key={i} value={i}>{i}</option>);
+      }
     }
     return options;
   }
@@ -60,7 +69,9 @@ class MyForm extends Component {
     }
 
     if (selectedYear === 1995) {
-      minDay = 16;
+      if (selectedMonth === 6) {
+        minDay = 16;
+      }
     }
 
     const options = [];
@@ -68,7 +79,6 @@ class MyForm extends Component {
       if ((this.props.year === 1995 && i === minDay) 
       || (this.props.year === currYear && i === maxDay)
         || (this.props.day === i)) {
-        console.log('HIT Selected Option Render');
         options.push(<option selected="selected" key={i} value={i}>{i}</option>);
       } else {
         options.push(<option key={i} value={i}>{i}</option>);
@@ -87,42 +97,50 @@ class MyForm extends Component {
   }
 
   handleSelectChange = (event) => {
-    const { name, value } = event.target;
-
-    const ValidatedDateRequest = () => {
+    const ValidatedDateRequest = (date) => {
+      const newDate = date;
       const [
         currDay,
         currMonth,
         currYear,
       ] = this.currentDate();
 
-      const selectedDate = [this.props.day, this.props.month, this.props.year];
-
       // Check for minimum year
-      if (selectedDate[2] === 1995) {
-        if (selectedDate[1] < 6) {
+      if (newDate[2] === 1995) {
+        if (newDate[1] < 6) {
           // Set month to minimum month allowed
-          selectedDate[1] = 6;
+          newDate[1] = 6;
         } 
-        if (selectedDate[0] < 16) {
+        if (newDate[0] < 16) {
           // Set day to minimum day allowed
-          selectedDate[0] = 16;
+          newDate[0] = 16;
         }
       }
       
       // Check for Maximum year based on current date
-      if (selectedDate[2] === currYear && selectedDate[1] >= currMonth) {
+      if (newDate[2] === currYear && newDate[1] >= currMonth) {
         // Set month to max month allowed
-        selectedDate[1] = currMonth;
-        if (selectedDate[0] > currDay) {
-          selectedDate[0] = currDay;
+        newDate[1] = currMonth;
+        if (newDate[0] > currDay) {
+          newDate[0] = currDay;
         }
       } 
-      console.log('Validated AFTER: ', selectedDate);
-      return selectedDate;
+      return newDate;
     };
+    
+    const { name, value } = event.target;
 
-    this.props.onComplete(ValidatedDateRequest());
+    const selectedDate = [this.props.day, this.props.month, this.props.year];
+
+    if (name === 'day') {
+      selectedDate[0] = parseInt(value, 10);
+    } else if (name === 'month') {
+      selectedDate[1] = parseInt(value, 10);
+    } else {
+      selectedDate[2] = parseInt(value, 10);
+    }
+
+    this.props.onComplete(ValidatedDateRequest(selectedDate));
   }
 
 
@@ -135,7 +153,7 @@ class MyForm extends Component {
         >
           <label htmlFor="select-day">Day</label>
           <select
-            key={1}
+            key={100}
             id="select-day"
             name="day"
             onChange={this.handleSelectChange}
@@ -145,7 +163,7 @@ class MyForm extends Component {
           
           <label htmlFor="select-month">Month</label>
           <select
-            key={2}
+            key={200}
             id="select-month" 
             name="month"
             onChange={this.handleSelectChange}
@@ -156,7 +174,7 @@ class MyForm extends Component {
           
           <label htmlFor="select-year">Year</label>
           <select
-            key={3}
+            key={300}
             id="select-year"
             name="year"
             onChange={this.handleSelectChange}

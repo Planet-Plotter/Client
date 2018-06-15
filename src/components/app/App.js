@@ -47,9 +47,8 @@ class App extends Component {
     let [
       day,
       month,
+      year,
     ] = values;
-
-    const year = values[2];
 
     this.setState({
       day,
@@ -58,11 +57,15 @@ class App extends Component {
     });
 
     // Conversion for proper url API requirements in case day and month are less than 2 digits
+
     day = day.toString();
     month = month.toString();
+    year = year.toString();
 
     if (day.length < 2) day = `0${day}`;
     if (month.length < 2) month = `0${month}`;
+
+    // TODO: ADD function to set localStorage to save user's selected date
 
     const url = `https://api.nasa.gov/planetary/apod?api_key=UpQHlODpCJ11wBVTPjtMqf9FZ8JS64dbO4MsV2Sa&start_date=${year}-${month}-${day}&end_date=${year}-${month}-${day}`;
 
