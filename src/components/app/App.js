@@ -15,7 +15,15 @@ class App extends Component {
   state = {
     data: [],
     modalIsOpen: false,
+    day: 16,
+    month: 6,
+    year: 1995,
   };
+
+  componentDidMount = () => {
+    this.handleSubmit([this.state.day, this.state.month, this.state.year]);
+  }
+
 
   requestPlanetData = (queryUrl) => {
     superagent.get(queryUrl)
@@ -140,7 +148,12 @@ class App extends Component {
           
           <div id="img-navigation">
             <PreviousSlider handlePreviousImg={this.handlePreviousImg} />
-            <Form onComplete={this.handleSubmit} />
+            <Form
+              day={this.state.day}
+              month={this.state.month}
+              year={this.state.year}
+              onComplete={this.handleSubmit}
+            />
             <NextSlider handleNextImg={this.handleNextImg} />
           </div>            
 

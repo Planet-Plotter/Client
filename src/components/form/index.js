@@ -2,16 +2,6 @@ import React, { Component } from 'react';
 import './form.css';
 
 class MyForm extends Component {
-  state = {
-    day: 16,
-    month: 6,
-    year: 1995,
-  }
-
-  componentDidMount = () => {
-    this.props.onComplete([this.state.day, this.state.month, this.state.year]);
-  }
-
   createYearOptions = () => {
     const currentYear = this.currentDate()[2];
 
@@ -24,7 +14,7 @@ class MyForm extends Component {
 
   createMonthOptions = () => {
     const currYear = this.currentDate()[2];
-    const selectedYear = this.state.year;
+    const selectedYear = this.props.year;
     let maxMonth = 12;
     let minMonth = 1;
 
@@ -46,8 +36,8 @@ class MyForm extends Component {
   createDayOptions = () => {
     const currYear = this.currentDate()[2];
     const currMonth = this.currentDate()[1];
-    const selectedYear = this.state.year;
-    const selectedMonth = this.state.month;
+    const selectedYear = this.props.year;
+    const selectedMonth = this.props.month;
     let maxDay = 31;
     let minDay = 1;
 
@@ -75,13 +65,11 @@ class MyForm extends Component {
 
     const options = [];
     for (let i = minDay; i <= maxDay; i++) {
-      if ((this.state.year === 1995 && i === minDay) 
-      || (this.state.year === currYear && i === maxDay)
-        || (this.state.day === i)) {
+      if ((this.props.year === 1995 && i === minDay) 
+      || (this.props.year === currYear && i === maxDay)
+        || (this.props.day === i)) {
         console.log('HIT Selected Option Render');
         options.push(<option selected="selected" key={i} value={i}>{i}</option>);
-      // } else if (this.state.year === currYear && i === maxDay) {
-      //   options.push(<option selected key={i} value={i}>{i}</option>);
       } else {
         options.push(<option key={i} value={i}>{i}</option>);
       }
@@ -108,23 +96,17 @@ class MyForm extends Component {
         currYear,
       ] = this.currentDate();
 
-      const selectedDate = [this.state.day, this.state.month, this.state.year];
+      const selectedDate = [this.props.day, this.props.month, this.props.year];
 
       // Check for minimum year
       if (selectedDate[2] === 1995) {
         if (selectedDate[1] < 6) {
           // Set month to minimum month allowed
           selectedDate[1] = 6;
-          this.setState({
-            month: 6,
-          });
         } 
         if (selectedDate[0] < 16) {
           // Set day to minimum day allowed
           selectedDate[0] = 16;
-          this.setState({
-            day: 16,
-          });
         }
       }
       
@@ -132,31 +114,15 @@ class MyForm extends Component {
       if (selectedDate[2] === currYear && selectedDate[1] >= currMonth) {
         // Set month to max month allowed
         selectedDate[1] = currMonth;
-        this.setState({
-          month: currMonth,
-        });
         if (selectedDate[0] > currDay) {
           selectedDate[0] = currDay;
-          this.setState({
-            day: currDay,
-          });
         }
       } 
       console.log('Validated AFTER: ', selectedDate);
       return selectedDate;
     };
 
-    this.setState({
-      [name]: parseInt(value, 10),
-    }, () => {
-      const newDateRequested = ValidatedDateRequest();
-      this.props.onComplete(newDateRequested);
-      this.setState({
-        day: newDateRequested[0],
-        month: newDateRequested[1],
-        year: newDateRequested[2],
-      });
-    });
+    this.props.onComplete(ValidatedDateRequest());
   }
 
 
@@ -183,7 +149,7 @@ class MyForm extends Component {
             id="select-month" 
             name="month"
             onChange={this.handleSelectChange}
-            defaultValue={this.state.month}
+            defaultValue={this.props.month}
           >
             {this.createMonthOptions()}
           </select>
