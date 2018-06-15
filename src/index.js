@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './components/app/App';
+import ApodGallery from './apod-gallery/components/apod-gallery';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<ApodGallery />, document.getElementById('apod-gallery'));
 registerServiceWorker();

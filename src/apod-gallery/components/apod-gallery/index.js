@@ -6,7 +6,7 @@ import Modal from '../modal';
 import Form from '../form';
 import PreviousSlider from '../previous-slider';
 import NextSlider from '../next-slider';
-import './App.css';
+import './apod-gallery.css';
 
 
 class App extends Component {
@@ -23,7 +23,6 @@ class App extends Component {
   componentDidMount = () => {
     this.handleSubmit([this.state.day, this.state.month, this.state.year]);
   }
-
 
   requestPlanetData = (queryUrl) => {
     superagent.get(queryUrl)
@@ -57,7 +56,6 @@ class App extends Component {
     });
 
     // Conversion for proper url API requirements in case day and month are less than 2 digits
-
     day = day.toString();
     month = month.toString();
     year = year.toString();
