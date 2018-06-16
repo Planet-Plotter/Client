@@ -153,6 +153,10 @@ class App extends Component {
     }
   }
 
+  openHDImg = () => {
+    window.open(this.state.data.hdurl, '_blank');
+  }
+
   render() {
     const {
       data, 
@@ -164,7 +168,7 @@ class App extends Component {
 
     if (data) {
       url = data.url; //eslint-disable-line
-      title = data.title;//eslint-disable-line
+      title = data.title; //eslint-disable-line
       explanation = data.explanation;//eslint-disable-line
     }
     return (
@@ -172,10 +176,7 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title"> Astronomy Picture of the Day</h1>
         </header>
-        
-        {/* <TableOne data={this.state.data} /> */}
         <main>
-          
           <div id="img-navigation">
             <PreviousSlider handlePreviousImg={this.handlePreviousImg} />
             <Form
@@ -195,7 +196,7 @@ class App extends Component {
             className="response-img"
             src={url}
             alt={title}
-            onClick={this.toggleModal}
+            onClick={this.openHDImg}
           />
           <h4>{title}</h4>
           <p>{explanation}</p>
